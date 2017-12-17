@@ -34,7 +34,7 @@ exports.signup = (req, res, next) => {
         return next(error);
       }
 
-      res.json({ success: true })
+      res.json({ success: true });
      })
     // Respond to request
   });

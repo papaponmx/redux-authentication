@@ -17,7 +17,7 @@ const userSchema = new Schema({
 // Before saving a model, run this function
 userSchema.pre('save', function(next) {
 
-  // get access ti user model
+  // get access the user model
   const user = this;
 
   // generate a salt, then run callback
