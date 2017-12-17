@@ -24,6 +24,16 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
     }
 
     // compare - is password equal to user.password?
+    user.comparePassword(password, (error, isMatch) => {
+      if (error) {
+        return done(err);
+      }
+      if (!isMatch) {
+        return done(null, false);
+      }
+
+      return done(null, user);
+    });
    });
  });
 
