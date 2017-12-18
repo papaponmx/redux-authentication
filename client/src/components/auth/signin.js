@@ -1,24 +1,44 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
-export class Signin extends Component {
+const renderInput = field => (
+    <div>
+      <input {...field.input} type={field.type}/>
+      {
+        field.meta.touched &&
+        field.meta.error &&
+        <span className="error">{field.meta.error}</span>
+      }
+    </div>);
+
+class Signin extends Component {
   handleFormSubmit({ email, password}) {
-    
+    this.props.signinUser({ email, password});
   }
 
 
   render() {
-    const { handleSubmit, fields: { email, password }} = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <fieldset className="form-group">
           <label> Email:</label>
-          <input {...email} className="form-control" />
+          <Field
+            name="email"
+            component={renderInput}
+            type="email"
+          />
         </fieldset>
         <fieldset className="form-group">
           <label> Password:</label>
-          <input {...password} className="form-control" />
+          <Field
+            name="password"
+            component={renderInput}
+            type="password"
+          />
         </fieldset>
         <button action="submit" className="btn btn-primary">Sign in</button>
       </form>
@@ -27,7 +47,10 @@ export class Signin extends Component {
 }
 
 
-export default reduxForm({
-  form: 'signin',
-  fields: ['email', 'password'],
-})(Signin);
+export default reduxForm(
+  {
+    form: 'signin',
+    fields: ['email', 'password'],
+  })(
+    connect(null, actions)(Signin)
+  );
