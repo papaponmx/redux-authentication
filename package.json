@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "bcrypt-nodejs": "^0.0.3"
+    "bcrypt-nodejs": "^0.0.3",
+    "redux-thunk": "^2.2.0"
   }
 }
