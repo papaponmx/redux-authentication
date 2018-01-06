@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-export class SignOut extends Component {
+export class Signout extends Component {
   componentWillMount() {
     this.props.signoutUser();
   }
@@ -17,11 +17,11 @@ export class SignOut extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+  signoutUser: actions.signoutUser
 });
 
 const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignOut);
+export default connect(mapStateToProps, mapDispatchToProps)(Signout);

@@ -44,10 +44,7 @@ export const authError = (error) => ({
 
 export const signoutUser = (action) => {
   localStorage.removeItem('token');
-
-
   return ({
     type: UNAUTH_USER,
-    payload: action.payload
   });
 };
