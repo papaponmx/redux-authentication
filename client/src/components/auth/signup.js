@@ -52,6 +52,18 @@ const validate = (formProps) => {
     errors.password = 'Passwords must match';
   }
 
+  if (!formProps.password) { 
+    errors.password = 'Please enter a password';
+  }
+
+  if (!formProps.passwordConfirm) { 
+    errors.passwordConfirm = 'Please enter a password Confirmation';
+  }
+
+  if (!formProps.email) { 
+    errors.email = 'Please enter a email';
+  }
+
   return errors;
 }
 
