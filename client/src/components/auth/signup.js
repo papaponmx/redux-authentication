@@ -4,7 +4,6 @@ import { reduxForm, Field } from 'redux-form';
 import * as actions from '../../actions';
 
 export class Signup extends Component {
-
   render() {
     const { handleSubmit, fields: {
       email,
@@ -15,7 +14,7 @@ export class Signup extends Component {
   } = this.props;
 
     return (
-      <form>
+      <form onSubmit={this.props.handleSubmit}>
         <fieldset className="form-group">
           <label>Email:</label>
           <Field className="form-control" component={renderField} name="email" />
@@ -69,7 +68,12 @@ const validate = (formProps) => {
 
 
 const mapStateToProps = (state) => ({});
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  handleSubmit: (values ) => (actions.signupUser({
+    email: values.email,
+    password: values.password,
+  }))
+};
 
 export default reduxForm({
   form: 'signup',
