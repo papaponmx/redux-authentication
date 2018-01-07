@@ -4,7 +4,7 @@ export default class Feature extends Component {
   render() {
     return (
       <div>
-        feature
+        Feature
       </div>
     )
   }
