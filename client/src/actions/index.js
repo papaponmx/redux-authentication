@@ -56,3 +56,15 @@ export const signupUser = (theRequestData) => {
     );
   }
 };
+
+
+export const fetchMessage = () => {
+  return function(dispatch) {
+      axios.get(ROOT_URL)
+      .then((res) => {
+        console.log(response);
+       })
+  }
+
+
+};
