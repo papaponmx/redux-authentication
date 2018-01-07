@@ -4,6 +4,18 @@ import { reduxForm, Field } from 'redux-form';
 import * as actions from '../../actions';
 
 export class Signup extends Component {
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops!</strong>
+        </div>
+      );
+    } else {
+      return '';
+    }
+  }
+
   render() {
     const { handleSubmit, fields: {
       email,
@@ -27,6 +39,7 @@ export class Signup extends Component {
         <label>Password Confirmation</label>
         <Field name="passwordConfirm" type="password" className="form-control" component={renderField} {...passwordConfirm} />
       </fieldset>
+      { this.renderAlert() }
       <button type="submit" className="btn btn-primary">Sign up!</button>
     </form>
   )
@@ -67,13 +80,14 @@ const validate = (formProps) => {
 }
 
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  errorMessage : state.auth.error,
+});
 const mapDispatchToProps = (dispatch) => {
   return {
     handleSubmit: (event) => {
-      const password = event.target.password.value;
-      const email= event.target.email.value;
-      debugger;
+      const password = String(event.target.password.value);
+      const email= String(event.target.email.value);
       dispatch(actions.signupUser({ password, email }));
     },
   };
@@ -88,5 +102,5 @@ export default reduxForm({
   ],
   validate,
 })(
-  connect(null, mapDispatchToProps)(Signup)
+  connect(mapStateToProps, mapDispatchToProps)(Signup)
 );
