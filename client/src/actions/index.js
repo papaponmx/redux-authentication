@@ -44,8 +44,14 @@ export const signoutUser = (action) => {
 };
 
 
-export function signupUser({ email, password }) {
+export const signupUser = (theRequestData) => {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/signup`, { email, password });
+    axios.post(`${ROOT_URL}/signup`, theRequestData)
+    .then((response) => {
+
+    })
+    .catch(() => {
+
+     });
   }
 };

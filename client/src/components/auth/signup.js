@@ -13,24 +13,24 @@ export class Signup extends Component {
     meta,
   } = this.props;
 
-    return (
-      <form onSubmit={this.props.handleSubmit}>
-        <fieldset className="form-group">
-          <label>Email:</label>
-          <Field className="form-control" component={renderField} name="email" />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password</label>
-          <Field type="password" className="form-control" component={renderField} name="password" />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password Confirmation</label>
-          <Field name="passwordConfirm" type="password" className="form-control" component={renderField} {...passwordConfirm} />
-        </fieldset>
-        <button action="submit" className="btn btn-primary">Sign up!</button>
-      </form>
-    )
-  }
+  return (
+    <form onSubmit={this.props.handleSubmit}>
+      <fieldset className="form-group">
+        <label>Email:</label>
+        <Field className="form-control" component={renderField} name="email" />
+      </fieldset>
+      <fieldset className="form-group">
+        <label>Password</label>
+        <Field type="password" className="form-control" component={renderField} name="password" />
+      </fieldset>
+      <fieldset className="form-group">
+        <label>Password Confirmation</label>
+        <Field name="passwordConfirm" type="password" className="form-control" component={renderField} {...passwordConfirm} />
+      </fieldset>
+      <button type="submit" className="btn btn-primary">Sign up!</button>
+    </form>
+  )
+}
 }
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -68,11 +68,15 @@ const validate = (formProps) => {
 
 
 const mapStateToProps = (state) => ({});
-const mapDispatchToProps = {
-  handleSubmit: (values ) => (actions.signupUser({
-    email: values.email,
-    password: values.password,
-  }))
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSubmit: (event) => {
+      const password = event.target.password.value;
+      const email= event.target.email.value;
+      debugger;
+      dispatch(actions.signupUser({ password, email }));
+    },
+  };
 };
 
 export default reduxForm({
@@ -84,5 +88,5 @@ export default reduxForm({
   ],
   validate,
 })(
-  connect(mapStateToProps, mapDispatchToProps)(Signup)
+  connect(null, mapDispatchToProps)(Signup)
 );
