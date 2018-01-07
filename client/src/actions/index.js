@@ -4,6 +4,7 @@ import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
+  FETCH_MESSAGE,
 } from './types';
 
 const ROOT_URL = 'http://localhost:3090';
@@ -53,18 +54,24 @@ export const signupUser = (theRequestData) => {
       browserHistory.push('/feature');
     })
     .catch((response) => dispatch(authError('Something went wrong during Sing up :('))
-    );
-  }
+  );
+}
 };
 
 
 export const fetchMessage = () => {
   return function(dispatch) {
-      axios.get(ROOT_URL)
-      .then((res) => {
-        console.log(response);
-       })
-  }
+    axios.get(ROOT_URL, {
+      headers: { authorization: localStorage.getItem('token')
+    }
+  })
+  .then((res) => {
+    dispatch({
+      type: FETCH_MESSAGE,
+      payload: res.data.message,
+    });
+  })
+}
 
 
 };

@@ -2,6 +2,7 @@ import {
   AUTH_ERROR,
   AUTH_USER,
   UNAUTH_USER,
+  FETCH_MESSAGE,
 } from '../actions/types';
 
 export default (state = { }, action) => {
@@ -20,7 +21,10 @@ export default (state = { }, action) => {
       ...state,
       error: action.payload,
     }
-      break;
+    case FETCH_MESSAGE:
+    return {
+      message: action.payload,
+    }
     default:
     return state
   }
