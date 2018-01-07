@@ -66,9 +66,10 @@ export const fetchMessage = () => {
     }
   })
   .then((res) => {
-    dispatch({
+    console.log(res.data.message)
+    return dispatch({
       type: FETCH_MESSAGE,
-      payload: res.data.message,
+      res,
     });
   })
 }

@@ -23,7 +23,7 @@ export default (state = { }, action) => {
     }
     case FETCH_MESSAGE:
     return {
-      message: action.payload,
+      message: action.res.data.message,
     }
     default:
     return state

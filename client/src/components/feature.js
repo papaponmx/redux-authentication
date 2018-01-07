@@ -8,12 +8,18 @@ class Feature extends Component {
   }
 
   render() {
+    debugger;
     return (
       <div>
-        Feature
+        Feature: {this.props.message || 'Loading...'}
       </div>
     )
   }
 }
 
-export default connect(null, actions)(Feature);
+const mapStateToProps = state => ({
+  message: state.auth.message,
+});
+
+
+export default connect(mapStateToProps, actions)(Feature);
